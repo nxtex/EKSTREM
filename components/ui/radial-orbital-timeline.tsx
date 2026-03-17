@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { ArrowRight, Link, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface TimelineItem {
@@ -114,14 +113,12 @@ export default function RadialOrbitalTimeline({ timelineData }: RadialOrbitalTim
           ref={orbitRef}
           style={{ perspective: "1000px", transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)` }}
         >
-          {/* Center orb */}
           <div className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 via-blue-500 to-teal-500 animate-pulse flex items-center justify-center z-10">
             <div className="absolute w-20 h-20 rounded-full border border-white/20 animate-ping opacity-70" />
             <div className="absolute w-24 h-24 rounded-full border border-white/10 animate-ping opacity-50" style={{ animationDelay: "0.5s" }} />
             <div className="w-8 h-8 rounded-full bg-white/80 backdrop-blur-md" />
           </div>
 
-          {/* Orbit ring */}
           <div className="absolute w-96 h-96 rounded-full border border-white/10" />
 
           {timelineData.map((item, index) => {
@@ -134,7 +131,7 @@ export default function RadialOrbitalTimeline({ timelineData }: RadialOrbitalTim
             return (
               <div
                 key={item.id}
-                ref={(el) => (nodeRefs.current[item.id] = el)}
+                ref={(el) => { nodeRefs.current[item.id] = el; }}
                 className="absolute transition-all duration-700 cursor-pointer"
                 style={{
                   transform: `translate(${position.x}px, ${position.y}px)`,
@@ -143,7 +140,6 @@ export default function RadialOrbitalTimeline({ timelineData }: RadialOrbitalTim
                 }}
                 onClick={(e) => { e.stopPropagation(); toggleItem(item.id); }}
               >
-                {/* Energy aura */}
                 <div
                   className={`absolute rounded-full -inset-1 ${isPulsing ? "animate-pulse duration-1000" : ""}`}
                   style={{
@@ -155,7 +151,6 @@ export default function RadialOrbitalTimeline({ timelineData }: RadialOrbitalTim
                   }}
                 />
 
-                {/* Node icon */}
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center
                     ${isExpanded ? "bg-white text-black" : isRelated ? "bg-white/50 text-black" : "bg-black text-white"}
@@ -167,12 +162,10 @@ export default function RadialOrbitalTimeline({ timelineData }: RadialOrbitalTim
                   <Icon size={16} />
                 </div>
 
-                {/* Node label */}
                 <div className={`absolute top-12 whitespace-nowrap text-xs font-semibold tracking-wider transition-all duration-300 ${isExpanded ? "text-white scale-125" : "text-white/70"}`}>
                   {item.title}
                 </div>
 
-                {/* Expanded card */}
                 {isExpanded && (
                   <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-64 bg-black/90 backdrop-blur-lg border-white/30 shadow-xl shadow-white/10">
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-white/50" />
