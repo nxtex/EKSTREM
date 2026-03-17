@@ -16,6 +16,7 @@
     "lucide-react": "^0.469.0",
     "three": "^0.171.0",
     "@react-three/fiber": "^9.0.0",
+    "@radix-ui/react-slot": "^1.1.0",
     "@splinetool/runtime": "^1.9.28",
     "@splinetool/react-spline": "^4.0.0",
     "class-variance-authority": "^0.7.1",
